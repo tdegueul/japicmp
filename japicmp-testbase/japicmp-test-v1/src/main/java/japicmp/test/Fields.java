@@ -1,8 +1,6 @@
 package japicmp.test;
 
 public class Fields {
-	private int privateToPublicField;
-	private int privateToProtectedField;
 	private int privateToPackageProtectedField;
 	private int privateRemainsPrivateField;
 	public int publicToPrivateField;

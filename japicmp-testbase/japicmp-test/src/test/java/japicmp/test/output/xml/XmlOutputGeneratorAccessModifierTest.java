@@ -42,18 +42,6 @@ public class XmlOutputGeneratorAccessModifierTest {
 	}
 
 	@Test
-	public void publicFilterAccessModifierChangesFromPrivateToPublicVisible() {
-		Elements divForClass = XmlHelper.getDivForClass(documentPublic, replaceLastDotWith$(AccessModifierLevel.AccessModifierChangesFromPrivateToPublic.class.getCanonicalName()));
-		assertThat(divForClass.isEmpty(), is(false));
-	}
-
-	@Test
-	public void privateFilterAccessModifierChangesFromPrivateToPublicVisible() {
-		Elements divForClass = XmlHelper.getDivForClass(documentPrivate, replaceLastDotWith$(AccessModifierLevel.AccessModifierChangesFromPrivateToPublic.class.getCanonicalName()));
-		assertThat(divForClass.isEmpty(), is(false));
-	}
-
-	@Test
 	public void publicFilterAccessModifierChangesFromPublicToPrivateVisible() {
 		Elements divForClass = XmlHelper.getDivForClass(documentPublic, replaceLastDotWith$(AccessModifierLevel.AccessModifierChangesFromPublicToPrivate.class.getCanonicalName()));
 		assertThat(divForClass.isEmpty(), is(false));

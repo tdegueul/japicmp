@@ -40,16 +40,6 @@ public class AccessModifierLevelTest {
 	}
 
 	@Test
-	public void testChangesFromPrivateToPublic() {
-		JApiClass jApiClass = getJApiClass(jApiClasses, AccessModifierLevel.AccessModifierChangesFromPrivateToPublic.class.getName());
-		assertThat(jApiClass.getChangeStatus(), is(JApiChangeStatus.MODIFIED));
-		JApiMethod jApiMethod = getJApiMethod(jApiClass.getMethods(), "methodFromPrivateToPublic");
-		assertThat(jApiMethod.getChangeStatus(), is(JApiChangeStatus.MODIFIED));
-		assertThat(jApiMethod.getAccessModifier().getOldModifier().get(), is(AccessModifier.PRIVATE));
-		assertThat(jApiMethod.getAccessModifier().getNewModifier().get(), is(AccessModifier.PUBLIC));
-	}
-
-	@Test
 	public void testChangesFromPublicToPrivate() {
 		JApiClass jApiClass = getJApiClass(jApiClasses, AccessModifierLevel.AccessModifierChangesFromPublicToPrivate.class.getName());
 		assertThat(jApiClass.getChangeStatus(), is(JApiChangeStatus.MODIFIED));

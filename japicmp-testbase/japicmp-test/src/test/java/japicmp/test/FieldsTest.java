@@ -30,24 +30,6 @@ public class FieldsTest {
 	}
 
 	@Test
-	public void testPrivateToPublicField() {
-		JApiClass fieldsClass = getJApiClass(jApiClasses, Fields.class.getName());
-		assertThat(fieldsClass.getChangeStatus(), is(JApiChangeStatus.MODIFIED));
-		assertThat(getJApiField(fieldsClass.getFields(), "privateToPublicField").getChangeStatus(), is(JApiChangeStatus.MODIFIED));
-		assertThat(getJApiField(fieldsClass.getFields(), "privateToPublicField").getAccessModifier().getOldModifier(), is(Optional.of(AccessModifier.PRIVATE)));
-		assertThat(getJApiField(fieldsClass.getFields(), "privateToPublicField").getAccessModifier().getNewModifier(), is(Optional.of(AccessModifier.PUBLIC)));
-	}
-
-	@Test
-	public void testPrivateToProtectedField() {
-		JApiClass fieldsClass = getJApiClass(jApiClasses, Fields.class.getName());
-		assertThat(fieldsClass.getChangeStatus(), is(JApiChangeStatus.MODIFIED));
-		assertThat(getJApiField(fieldsClass.getFields(), "privateToProtectedField").getChangeStatus(), is(JApiChangeStatus.MODIFIED));
-		assertThat(getJApiField(fieldsClass.getFields(), "privateToProtectedField").getAccessModifier().getOldModifier(), is(Optional.of(AccessModifier.PRIVATE)));
-		assertThat(getJApiField(fieldsClass.getFields(), "privateToProtectedField").getAccessModifier().getNewModifier(), is(Optional.of(AccessModifier.PROTECTED)));
-	}
-
-	@Test
 	public void testPrivateToPackageProtectedField() {
 		JApiClass fieldsClass = getJApiClass(jApiClasses, Fields.class.getName());
 		assertThat(fieldsClass.getChangeStatus(), is(JApiChangeStatus.MODIFIED));

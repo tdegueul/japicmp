@@ -15,14 +15,6 @@ public class AccessModifierLevel {
 		}
 	}
 
-	public static class AccessModifierChangesFromPrivateToPublic {
-		public int fieldFromPrivateToPublic;
-
-		public void methodFromPrivateToPublic() {
-
-		}
-	}
-
 	public static class AccessModifierChangesFromPublicToPrivate {
 		private int fieldFromPublicToPrivate;
 
