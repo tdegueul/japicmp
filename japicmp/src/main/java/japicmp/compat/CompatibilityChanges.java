@@ -10,12 +10,7 @@ import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static japicmp.util.ModifierHelper.hasModifierLevelDecreased;
 import static japicmp.util.ModifierHelper.hasModifierLevelIncreased;
@@ -80,17 +75,14 @@ public class CompatibilityChanges {
 			// section 13.4.6 of "Java Language Specification" SE7
 			if (isNotPrivate(field) && field.getChangeStatus() == JApiChangeStatus.REMOVED) {
 				ArrayList<Integer> returnValues = new ArrayList<>();
-				forAllSuperclasses(jApiClass, classMap, returnValues, new OnSuperclassCallback<Integer>() {
-					@Override
-					public Integer callback(JApiClass superclass, Map<String, JApiClass> classMap, JApiChangeStatus changeStatusOfSuperclass) {
-						int movedToSuperclass = 0;
-						for (JApiField superclassField : superclass.getFields()) {
-							if (superclassField.getName().equals(field.getName()) && fieldTypeMatches(superclassField, field) && isNotPrivate(superclassField)) {
-								movedToSuperclass = 1;
-							}
+				forAllSuperclasses(jApiClass, classMap, returnValues, (superclass, classMap1, changeStatusOfSuperclass) -> {
+					int movedToSuperclass = 0;
+					for (JApiField superclassField : superclass.getFields()) {
+						if (superclassField.getName().equals(field.getName()) && fieldTypeMatches(superclassField, field) && isNotPrivate(superclassField)) {
+							movedToSuperclass = 1;
 						}
-						return movedToSuperclass;
 					}
+					return movedToSuperclass;
 				});
 				boolean movedToSuperclass = false;
 				for (Integer returnValue : returnValues) {
@@ -311,7 +303,11 @@ public class CompatibilityChanges {
 					addCompatibilityChange(method, JApiCompatibilityChange.METHOD_REMOVED);
 				}
 			}
-			
+
+			if (!isInterface(jApiClass) && method.getChangeStatus() == JApiChangeStatus.NEW && method.getAccessModifier().getNewModifier().get().getLevel() == AccessModifier.PUBLIC.getLevel()) {
+				addCompatibilityChange(method, JApiCompatibilityChange.METHOD_ADDED_TO_PUBLIC_CLASS);
+			}
+
 			// section 13.4.7 of "Java Language Specification" SE7
 			if (hasModifierLevelDecreased(method)) {
 				addCompatibilityChange(method, JApiCompatibilityChange.METHOD_LESS_ACCESSIBLE);
@@ -596,10 +592,24 @@ public class CompatibilityChanges {
 						if (!isAbstract(jApiMethod) && jApiMethod.getChangeStatus() != JApiChangeStatus.REMOVED && isNotPrivate(jApiMethod)) {
 							implementedMethods.add(jApiMethod);
 						}
+						Iterator<JApiMethod> iterator = removedAndNotOverriddenMethods.iterator();
+						while (iterator.hasNext()) {
+							JApiMethod removedAndNotOverriddenMethod = iterator.next();
+							if (jApiMethod.getName().equals(removedAndNotOverriddenMethod.getName()) && jApiMethod.hasSameSignature(removedAndNotOverriddenMethod)) {
+								iterator.remove();
+							}
+						}
 					}
 					for (JApiField jApiField : superclass.getFields()) {
 						if (jApiField.getChangeStatus() != JApiChangeStatus.REMOVED && isNotPrivate(jApiField)) {
 							fields.add(jApiField);
+						}
+						Iterator<JApiField> iterator = removedAndNotOverriddenFields.iterator();
+						while (iterator.hasNext()) {
+							JApiField removedAndNotOverriddenField = iterator.next();
+							if (jApiField.getName().equals(removedAndNotOverriddenField.getName()) && hasSameType(jApiField, removedAndNotOverriddenField)) {
+								iterator.remove();
+							}
 						}
 					}
 					for (JApiMethod jApiMethod : superclass.getMethods()) {
@@ -734,6 +744,8 @@ public class CompatibilityChanges {
 			hasSameNewType = field.getType().getOldTypeOptional().get().equals(otherField.getType().getNewTypeOptional().get());
 		} else if (field.getType().getOldTypeOptional().isPresent() && otherField.getType().getOldTypeOptional().isPresent()) {
 			hasSameNewType = field.getType().getOldTypeOptional().get().equals(otherField.getType().getOldTypeOptional().get());
+		} else if (field.getType().getNewTypeOptional().isPresent() && otherField.getType().getOldTypeOptional().isPresent()) {
+			hasSameNewType = field.getType().getNewTypeOptional().get().equals(otherField.getType().getOldTypeOptional().get());
 		}
 		return hasSameNewType;
 	}

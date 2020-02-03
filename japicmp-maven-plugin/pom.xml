@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.github.siom79.japicmp</groupId>
 		<artifactId>japicmp-base</artifactId>
-		<version>0.14.2-maracas</version>
+		<version>0.14.4-maracas</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -107,7 +107,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-plugin-plugin</artifactId>
-				<version>3.0</version>
+				<version>3.3</version>
 				<executions>
 					<execution>
 						<id>default-descriptor</id>

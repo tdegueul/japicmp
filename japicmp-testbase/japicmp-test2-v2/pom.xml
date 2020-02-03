@@ -3,8 +3,9 @@
 	<parent>
 		<artifactId>japicmp-testbase</artifactId>
 		<groupId>com.github.siom79.japicmp</groupId>
-		<version>0.14.2-maracas</version>
+		<version>0.14.4-maracas</version>
 	</parent>
+	
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>japicmp-test2-v2</artifactId>

@@ -8,7 +8,7 @@ The maven plugin can be included in the pom.xml file of your artifact in the fol
 <plugin>
 	<groupId>com.github.siom79.japicmp</groupId>
 	<artifactId>japicmp-maven-plugin</artifactId>
-	<version>0.14.1</version>
+	<version>0.14.3</version>
 	<configuration>
 		<oldVersion>
 			<dependency>
@@ -44,7 +44,7 @@ You can also leave out the &lt;oldVersion&gt; and &lt;newVersion&gt; elements:
 <plugin>
 	<groupId>com.github.siom79.japicmp</groupId>
 	<artifactId>japicmp-maven-plugin</artifactId>
-	<version>0.14.1</version>
+	<version>0.14.3</version>
 	<configuration>
 		<parameter>
 			<!-- see documentation -->
@@ -68,7 +68,7 @@ to configure the latest version more precisely (e.g. only GA versions), then you
 <plugin>
 	<groupId>com.github.siom79.japicmp</groupId>
 	<artifactId>japicmp-maven-plugin</artifactId>
-	<version>0.14.1</version>
+	<version>0.14.3</version>
 	<configuration>
 		<parameter>
         	<oldVersionPattern>\d+\.\d+\.\d+\.GA</oldVersionPattern>
@@ -85,6 +85,22 @@ to configure the latest version more precisely (e.g. only GA versions), then you
 </plugin>
 ```
 
+##Properties##
+
+The following properties can be set:
+
+| Property | Description |
+|----------|-------------|
+| japicmp.skip | Skip the execution of this plugin. |
+| japicmp.skipXmlReport | Skip the generation of the XML report. |
+| japicmp.skipHtmlReport | Skip the generation of the HTML report. |
+| japicmp.breakBuildOnModifications | Break the build in case of any modifications. |
+| japicmp.breakBuildOnBinaryIncompatibleModifications | Break the build in case of any binary incompatible modifications. |
+| japicmp.breakBuildOnSourceIncompatibleModifications | Break the build in case of any source incompatible modifications. |
+| japicmp.breakBuildBasedOnSemanticVersioning | Break the build in case the semantic versioning is violated. |
+| japicmp.breakBuildBasedOnSemanticVersioningForMajorVersionZero | Break the build in case of semantic versioning used with zero as major version number is violated. |
+
+
 ##Advanced Usage##
 
 An advanced configuration can utilize the following parameters:
@@ -95,13 +111,13 @@ An advanced configuration can utilize the following parameters:
 		<plugin>
 			<groupId>com.github.siom79.japicmp</groupId>
 			<artifactId>japicmp-maven-plugin</artifactId>
-			<version>0.14.1</version>
+			<version>0.14.3</version>
 			<configuration>
 				<oldVersion>
 					<dependency>
 						<groupId>japicmp</groupId>
 						<artifactId>japicmp-test-v1</artifactId>
-						<version>0.14.1</version>
+						<version>0.14.3</version>
 						<type>jar</type>
 					</dependency>
 				</oldVersion>
@@ -265,6 +281,7 @@ for each check. This allows you to customize the following verifications:
 | METHOD_NOW_STATIC | false | false | MAJOR |
 | METHOD_NO_LONGER_STATIC | false | false | MAJOR |
 | METHOD_ADDED_TO_INTERFACE | true | false | MINOR |
+| METHOD_ADDED_TO_PUBLIC_CLASS | true | true | PATCH |
 | METHOD_NOW_THROWS_CHECKED_EXCEPTION | true | false | MINOR |
 | METHOD_ABSTRACT_ADDED_TO_CLASS | true | false | MINOR |
 | METHOD_ABSTRACT_ADDED_IN_SUPERCLASS | true | false | MINOR |
@@ -333,7 +350,7 @@ Alternatively it can be used inside the `<reporting/>` tag in order to be invoke
 		<plugin>
 			<groupId>com.github.siom79.japicmp</groupId>
 			<artifactId>japicmp-maven-plugin</artifactId>
-			<version>0.14.1</version>
+			<version>0.14.3</version>
 			<reportSets>
 				<reportSet>
 					<reports>
