@@ -3,11 +3,7 @@
 	<parent>
 		<artifactId>japicmp-testbase</artifactId>
 		<groupId>com.github.siom79.japicmp</groupId>
-<<<<<<< HEAD
 		<version>0.14.4-maracas</version>
-=======
-		<version>0.14.4-SNAPSHOT</version>
->>>>>>> up/master
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>war</packaging>

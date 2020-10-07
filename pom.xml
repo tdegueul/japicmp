@@ -10,11 +10,7 @@
 
     <groupId>com.github.siom79.japicmp</groupId>
     <artifactId>japicmp-base</artifactId>
-<<<<<<< HEAD
     <version>0.14.4-maracas</version>
-=======
-    <version>0.14.4-SNAPSHOT</version>
->>>>>>> up/master
     <packaging>pom</packaging>
 
     <name>japicmp-base</name>
