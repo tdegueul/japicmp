@@ -8,7 +8,7 @@ The maven plugin can be included in the pom.xml file of your artifact in the fol
 <plugin>
 	<groupId>com.github.siom79.japicmp</groupId>
 	<artifactId>japicmp-maven-plugin</artifactId>
-	<version>0.14.3</version>
+	<version>0.14.4</version>
 	<configuration>
 		<oldVersion>
 			<dependency>
@@ -44,7 +44,7 @@ You can also leave out the &lt;oldVersion&gt; and &lt;newVersion&gt; elements:
 <plugin>
 	<groupId>com.github.siom79.japicmp</groupId>
 	<artifactId>japicmp-maven-plugin</artifactId>
-	<version>0.14.3</version>
+	<version>0.14.4</version>
 	<configuration>
 		<parameter>
 			<!-- see documentation -->
@@ -68,7 +68,7 @@ to configure the latest version more precisely (e.g. only GA versions), then you
 <plugin>
 	<groupId>com.github.siom79.japicmp</groupId>
 	<artifactId>japicmp-maven-plugin</artifactId>
-	<version>0.14.3</version>
+	<version>0.14.4</version>
 	<configuration>
 		<parameter>
         	<oldVersionPattern>\d+\.\d+\.\d+\.GA</oldVersionPattern>
@@ -111,13 +111,13 @@ An advanced configuration can utilize the following parameters:
 		<plugin>
 			<groupId>com.github.siom79.japicmp</groupId>
 			<artifactId>japicmp-maven-plugin</artifactId>
-			<version>0.14.3</version>
+			<version>0.14.4</version>
 			<configuration>
 				<oldVersion>
 					<dependency>
 						<groupId>japicmp</groupId>
 						<artifactId>japicmp-test-v1</artifactId>
-						<version>0.14.3</version>
+						<version>0.14.4</version>
 						<type>jar</type>
 					</dependency>
 				</oldVersion>
@@ -283,6 +283,7 @@ for each check. This allows you to customize the following verifications:
 | METHOD_ADDED_TO_INTERFACE | true | false | MINOR |
 | METHOD_ADDED_TO_PUBLIC_CLASS | true | true | PATCH |
 | METHOD_NOW_THROWS_CHECKED_EXCEPTION | true | false | MINOR |
+| METHOD_NO_LONGER_THROWS_CHECKED_EXCEPTION | true | false | MINOR |
 | METHOD_ABSTRACT_ADDED_TO_CLASS | true | false | MINOR |
 | METHOD_ABSTRACT_ADDED_IN_SUPERCLASS | true | false | MINOR |
 | METHOD_ABSTRACT_ADDED_IN_IMPLEMENTED_INTERFACE | true | false | MINOR |
@@ -350,7 +351,7 @@ Alternatively it can be used inside the `<reporting/>` tag in order to be invoke
 		<plugin>
 			<groupId>com.github.siom79.japicmp</groupId>
 			<artifactId>japicmp-maven-plugin</artifactId>
-			<version>0.14.3</version>
+			<version>0.14.4</version>
 			<reportSets>
 				<reportSet>
 					<reports>

@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.github.siom79.japicmp</groupId>
 		<artifactId>japicmp-base</artifactId>
-		<version>0.14.4-maracas</version>
+		<version>0.14.5-maracas</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -24,7 +24,7 @@
 	</licenses>
 
 	<properties>
-		<ant.version>1.9.5</ant.version>
+		<ant.version>1.9.15</ant.version>
 	</properties>
 
 	<dependencies>
